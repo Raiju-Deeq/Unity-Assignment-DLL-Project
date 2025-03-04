@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &405560981576432040
+--- !u!1 &8043726429106377289
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6383661034265042087}
-  - component: {fileID: 8845518663534230738}
-  - component: {fileID: 68100698906373732}
-  - component: {fileID: 8732616666634166863}
-  - component: {fileID: 5302403086034520795}
-  - component: {fileID: 8426298492246091408}
+  - component: {fileID: 1210337207025202151}
+  - component: {fileID: 1485834475277101717}
+  - component: {fileID: 8265644245530051039}
+  - component: {fileID: 547576096095653098}
+  - component: {fileID: 4510223052272690444}
+  - component: {fileID: 334507295135552894}
   m_Layer: 0
-  m_Name: Chaser
+  m_Name: Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6383661034265042087
+--- !u!4 &1210337207025202151
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405560981576432040}
+  m_GameObject: {fileID: 8043726429106377289}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.5538473, y: 1.1185678, z: 5.8368564}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8845518663534230738
+--- !u!33 &1485834475277101717
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405560981576432040}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &68100698906373732
+  m_GameObject: {fileID: 8043726429106377289}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8265644245530051039
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405560981576432040}
+  m_GameObject: {fileID: 8043726429106377289}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9787bfcdfb0166246bbd5bef556be2cd, type: 2}
+  - {fileID: 2100000, guid: f1e3ce8405812f0469591f10ef6b7378, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8732616666634166863
-BoxCollider:
+--- !u!135 &547576096095653098
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405560981576432040}
+  m_GameObject: {fileID: 8043726429106377289}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -105,15 +105,15 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5302403086034520795
+--- !u!54 &4510223052272690444
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405560981576432040}
+  m_GameObject: {fileID: 8043726429106377289}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -134,19 +134,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8426298492246091408
+--- !u!114 &334507295135552894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405560981576432040}
+  m_GameObject: {fileID: 8043726429106377289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c615859b704c40ab8042ba4e34598e46, type: 3}
+  m_Script: {fileID: 11500000, guid: 7908a6b81cbdc454d985644c59664277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: chaser
-  movementSpeed: 3
-  chaseRange: 10
-  attackRange: 2
+  movementSpeed: 2
+  shootingRange: 5
+  fireRate: 1
+  projectilePrefab: {fileID: 1277608042843819373, guid: e029bc8263329b248b09ac18ccd0a62b, type: 3}
+  firePoint: {fileID: 1210337207025202151}
