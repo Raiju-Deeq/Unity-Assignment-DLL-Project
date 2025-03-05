@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using GamePlayDLL;
-// This script defines the Chaser enemy type, which actively chases and attacks the player when in range.
+
 public class Chaser : Enemy
 {
     [SerializeField] private float chaseRange = 10f;
     [SerializeField] private float attackRange = 2f;
+    [SerializeField] private int collisionDamage = 10;
 
     private void Start()
     {
@@ -36,7 +37,8 @@ public class Chaser : Enemy
         // Attack the player if within range
         if (Vector3.Distance(transform.position, target.position) <= attackRange)
         {
-            player.TakeDamage(10);
+            player.TakeDamage(collisionDamage);
+            Debug.Log($"Chaser attacked player for {collisionDamage} damage.");
         }
     }
 
@@ -49,6 +51,19 @@ public class Chaser : Enemy
         if (target != null && target.GetComponent<IPlayer>() != null)
         {
             Attack(target.GetComponent<IPlayer>());
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            IPlayer player = collision.gameObject.GetComponent<IPlayer>();
+            if (player != null)
+            {
+                player.TakeDamage(collisionDamage);
+                Debug.Log($"Chaser collided with player, dealing {collisionDamage} damage.");
+            }
         }
     }
 }

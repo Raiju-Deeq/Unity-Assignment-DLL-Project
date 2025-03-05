@@ -1,10 +1,10 @@
 using UnityEngine;
-// This script controls the behavior of projectiles, including movement towards a target, lifetime, and damage dealing on collision with the player
+using GamePlayDLL;
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float lifetime = 5f;
-    [SerializeField] private int damage = 10;
+    public float lifeTime = 3.0f;
+    public float moveSpeed = 40.0f;
+    private int damage = 2;
     private Vector3 targetPosition;
 
     public void SetTarget(Vector3 target)
@@ -12,18 +12,23 @@ public class Projectile : MonoBehaviour
         targetPosition = target;
     }
 
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
+    }
+
     private void Start()
     {
-        // Destroy projectile after its lifetime expires
-        Destroy(gameObject, lifetime);
+        // Destroy the projectile after its lifetime
+        Destroy(gameObject, lifeTime);
     }
 
     private void Update()
     {
-        // Move projectile towards target
+        // Move the projectile towards the target
         if (targetPosition != Vector3.zero)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 Destroy(gameObject);
@@ -31,17 +36,17 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        // Deal damage to player on collision
         if (other.CompareTag("Player"))
         {
-            Player playerScript = other.GetComponent<Player>();
-            if (playerScript != null)
+            IPlayer player = other.GetComponent<IPlayer>();
+            if (player != null)
             {
-                playerScript.TakeDamage(damage);
+                player.TakeDamage(damage);
+                Debug.Log($"Projectile hit player for {damage} damage.");
             }
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

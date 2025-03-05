@@ -1,6 +1,6 @@
 using UnityEngine;
 using GamePlayDLL;
-// This script defines the Shooter enemy type, which moves towards the player and shoots projectiles when in range.
+
 public class Shooter : MonoBehaviour, IEnemy
 {
     [Header("Shooter Settings")]
@@ -9,6 +9,7 @@ public class Shooter : MonoBehaviour, IEnemy
     [SerializeField] private float fireRate = 1f; // Time between shots
     [SerializeField] private GameObject projectilePrefab; // The projectile to shoot
     [SerializeField] private Transform firePoint; // Where the projectile spawns
+    [SerializeField] private int projectileDamage = 2;
 
     private Transform player; // Reference to the player
     private float nextFireTime = 0f;
@@ -61,6 +62,8 @@ public class Shooter : MonoBehaviour, IEnemy
                 if (projectileScript != null)
                 {
                     projectileScript.SetTarget(player.position);
+                    projectileScript.SetDamage(projectileDamage);
+                    Debug.Log($"Shooter fired a projectile with {projectileDamage} damage.");
                 }
             }
             else

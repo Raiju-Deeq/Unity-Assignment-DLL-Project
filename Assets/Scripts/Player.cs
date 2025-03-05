@@ -1,52 +1,71 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using GamePlayDLL;
-// This script defines the Player class, handling player movement, health, power-ups, and other player-specific behaviors.
+
 public class Player : Character, IPlayer
 {
+    [SerializeField] private float maximumSpeed = 10f;
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private Vector3 respawnPosition = Vector3.zero;
+
+    private float currentHealth;
     private ScoreManager scoreManager;
     private PowerUpManager powerUpManager;
-
-    [SerializeField] private float maximumSpeed;
-    [SerializeField] private float healthCount;
+    private bool isInvulnerable = false;
 
     private void Awake()
     {
         scoreManager = new ScoreManager();
         powerUpManager = new PowerUpManager();
+        currentHealth = maxHealth;
     }
-    
+
     public void MovePlayer()
     {
-        // Implement player movement logic
+        // Calculate movement based on input
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        transform.Translate(movement * movementSpeed * Time.deltaTime);
+        // Apply movement, clamped to maximum speed
+        transform.Translate(movement * Mathf.Min(movementSpeed, maximumSpeed) * Time.deltaTime);
     }
 
     public void Die()
     {
-        // Implement death logic
         Debug.Log($"{characterName} has died.");
-        // Trigger game over state
+        StartCoroutine(RespawnCoroutine());
+    }
+
+    private IEnumerator RespawnCoroutine()
+    {
+        isInvulnerable = true;
+        // Wait for 2 seconds before respawning
+        yield return new WaitForSeconds(2f);
+        Respawn();
+        // 1 second of invulnerability after respawn
+        yield return new WaitForSeconds(1f);
+        isInvulnerable = false;
     }
 
     public void Respawn()
     {
-        // Implement respawn logic
-        healthCount = 100f;
-        transform.position = Vector3.zero;
-        Debug.Log($"{characterName} has respawned.");
+        currentHealth = maxHealth;
+        transform.position = respawnPosition;
+        Debug.Log($"{characterName} has respawned with {currentHealth} health.");
     }
 
     public void ApplyPowerUp(PowerUpType type, float duration)
     {
         powerUpManager.ApplyPowerUp(this, type, duration);
+        Debug.Log($"Applied power-up: {type} for {duration} seconds.");
     }
 
     public void TakeDamage(int damage)
     {
-        healthCount -= damage;
-        if (healthCount <= 0)
+        if (isInvulnerable) return;
+
+        currentHealth -= damage;
+        Debug.Log($"{characterName} took {damage} damage. Current health: {currentHealth}");
+
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -55,6 +74,7 @@ public class Player : Character, IPlayer
     public void AddScore(int points)
     {
         scoreManager.AddScore(points);
+        Debug.Log($"Score increased by {points}. New score: {scoreManager.GetCurrentScore()}");
     }
 
     public int GetScore()
@@ -64,7 +84,6 @@ public class Player : Character, IPlayer
 
     private void Update()
     {
-        ClampPosition();
         MovePlayer();
         powerUpManager.UpdatePowerUps();
     }
