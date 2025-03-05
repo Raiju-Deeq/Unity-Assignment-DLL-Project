@@ -147,4 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  waitTime: 1
+  waitTime: 3
+  spawnAreaMin: {x: -10, y: 1, z: -10}
+  spawnAreaMax: {x: 10, y: 0, z: 10}
+  numberOfPatrolPoints: 5

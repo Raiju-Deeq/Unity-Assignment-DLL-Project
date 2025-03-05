@@ -27,6 +27,7 @@ public abstract class Enemy : Character, IEnemy
         if (target != null)
         {
             // Basic chase logic
+            ClampPosition();
             transform.position = Vector3.MoveTowards(transform.position, target.position, movementSpeed * Time.deltaTime);
         }
     }

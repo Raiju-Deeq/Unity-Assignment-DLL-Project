@@ -1,17 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using GamePlayDLL;
 // This script defines the Player class, handling player movement, health, power-ups, and other player-specific behaviors.
 public class Player : Character, IPlayer
 {
+    private ScoreManager scoreManager;
+    private PowerUpManager powerUpManager;
+
     [SerializeField] private float maximumSpeed;
     [SerializeField] private float healthCount;
-    private PowerUpManager powerUpManager;
 
     private void Awake()
     {
+        scoreManager = new ScoreManager();
         powerUpManager = new PowerUpManager();
     }
-
+    
     public void MovePlayer()
     {
         // Implement player movement logic
@@ -48,8 +52,19 @@ public class Player : Character, IPlayer
         }
     }
 
+    public void AddScore(int points)
+    {
+        scoreManager.AddScore(points);
+    }
+
+    public int GetScore()
+    {
+        return scoreManager.GetCurrentScore();
+    }
+
     private void Update()
     {
+        ClampPosition();
         MovePlayer();
         powerUpManager.UpdatePowerUps();
     }

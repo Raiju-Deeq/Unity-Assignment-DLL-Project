@@ -150,6 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: player
   movementSpeed: 10
+  damage: 0
+  border: 9.5
   maximumSpeed: 30
   healthCount: 100
 --- !u!54 &-3685686205240884132
