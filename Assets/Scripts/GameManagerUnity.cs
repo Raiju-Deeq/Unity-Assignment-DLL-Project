@@ -5,6 +5,9 @@ using GamePlayDLL;
 public class GameManagerUnity : MonoBehaviour
 {
     private GameManager gameManager;
+    public GameObject hazardPrefab;
+    public int numberOfHazards = 5;
+    public Vector3 levelBounds = new Vector3(10, 0, 10);
 
     [Header("Player Settings")]
     [SerializeField] private GameObject playerPrefab;
@@ -32,6 +35,21 @@ public class GameManagerUnity : MonoBehaviour
         SpawnPlayer();
         StartCoroutine(SpawnEnemiesWithDelay());
         InvokeRepeating(nameof(SpawnCollectable), 0f, collectableSpawnInterval);
+        SpawnHazards();
+    }
+
+    private void SpawnHazards()
+    {
+        for (int i = 0; i < numberOfHazards; i++)
+        {
+            Vector3 randomPosition = new Vector3(
+                Random.Range(-levelBounds.x, levelBounds.x),
+                0,
+                Random.Range(-levelBounds.z, levelBounds.z)
+            );
+
+            Instantiate(hazardPrefab, randomPosition, Quaternion.identity);
+        }
     }
 
     private void SpawnPlayer()
