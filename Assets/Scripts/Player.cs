@@ -84,6 +84,7 @@ public class Player : Character, IPlayer
 
     private void Update()
     {
+        ClampPosition();
         MovePlayer();
         powerUpManager.UpdatePowerUps();
     }

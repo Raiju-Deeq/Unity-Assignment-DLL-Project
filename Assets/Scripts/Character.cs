@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected string characterName;
     [SerializeField] protected float movementSpeed;
     [SerializeField] protected float damage;
-    [SerializeField] protected float border = 9.5f;
+    [SerializeField] protected float border = 24.5f;
 
     // Public method to get the character's name
     public string GetName() => characterName;
