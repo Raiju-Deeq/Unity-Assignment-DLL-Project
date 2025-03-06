@@ -11,7 +11,7 @@ public class EnvironmentHazard : MonoBehaviour
     /// <summary>
     /// The amount of damage dealt to the player when the hazard is active.
     /// </summary>
-    public int damageAmount = 10;
+    //public int damageAmount = 10;
 
     /// <summary>
     /// The time interval between state changes (active/inactive).
@@ -80,7 +80,8 @@ public class EnvironmentHazard : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.TakeDamage(damageAmount);
+                //player.TakeDamage(damageAmount);
+                player.Die();
             }
         }
     }

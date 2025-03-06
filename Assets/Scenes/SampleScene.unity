@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hazardPrefab: {fileID: 4121246153694886782, guid: 15841fb784dff5d43854a072078bc068, type: 3}
-  numberOfHazards: 10
+  numberOfHazards: 25
   levelBounds: {x: -24.5, y: 0, z: 24.5}
   playerPrefab: {fileID: 523525480221488092, guid: f4aa6ca3cc896e4468c448a0ba657c51, type: 3}
   wandererPrefab: {fileID: 1821147396123280671, guid: 70b245d6eddfd804eb793f60b0a3b5de, type: 3}
@@ -759,7 +759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 550, y: 150}
+  m_AnchoredPosition: {x: 545, y: 175}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1612515259

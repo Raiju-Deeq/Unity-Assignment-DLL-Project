@@ -101,7 +101,7 @@ public class Player : Character, IPlayer
 
     private IEnumerator RemovePowerUpAfterDelay(PowerUpEffect effect)
     {
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(5f);
         effect.RemoveEffect(this);
     }
 
