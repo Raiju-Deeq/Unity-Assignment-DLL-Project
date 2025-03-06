@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using GamePlayDLL;
+using UnityEngine.UI;
 // This script manages the overall game state, including spawning players, enemies, and collectables, as well as handling game flow (start, pause, resume, end) and score display.
 public class GameManagerUnity : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class GameManagerUnity : MonoBehaviour
     [SerializeField] private GameObject[] collectablePrefabs;
     [SerializeField] private float collectableSpawnInterval = 5f;
 
+    [Header("UI Elements")]
+    [SerializeField] private Text scoreText;
+
     private void Start()
     {
         gameManager = new GameManager();
@@ -36,6 +40,12 @@ public class GameManagerUnity : MonoBehaviour
         StartCoroutine(SpawnEnemiesWithDelay());
         InvokeRepeating(nameof(SpawnCollectable), 0f, collectableSpawnInterval);
         SpawnHazards();
+        UpdateScoreUI();
+    }
+
+    private void Update()
+    {
+        UpdateScoreUI();
     }
 
     private void SpawnHazards()
@@ -128,8 +138,12 @@ public class GameManagerUnity : MonoBehaviour
         Debug.Log("Game Over");
     }
 
-    private void OnGUI()
+    private void UpdateScoreUI()
     {
-        GUI.Label(new Rect(10, 10, 200, 20), $"Score: {gameManager.GetCurrentScore()}");
+        if (scoreText != null)
+        {
+            scoreText.text = $"Score: {gameManager.GetCurrentScore()}";
+        }
     }
+
 }

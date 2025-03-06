@@ -150,4 +150,4 @@ MonoBehaviour:
   waitTime: 3
   spawnAreaMin: {x: -24.5, y: 1, z: -24.5}
   spawnAreaMax: {x: 24.5, y: 0, z: 24.5}
-  numberOfPatrolPoints: 5
+  numberOfPatrolPoints: 10
