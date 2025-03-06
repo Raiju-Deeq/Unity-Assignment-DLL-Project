@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-// Tutorial NPC currently not working properly with how player handles ontrigger
-// Disabled NPC object for now come back for testing and fixing later
 
+/// <summary>
+/// Handles interaction with an NPC that displays game controls.
+/// Currently disabled due to issues with player OnTrigger handling.
+/// </summary>
 public class NPCInteraction : MonoBehaviour
 {
     [Header("NPC Settings")]
@@ -12,6 +14,9 @@ public class NPCInteraction : MonoBehaviour
 
     private bool isPlayerNearby = false;
 
+    /// <summary>
+    /// Checks for player input to show controls when nearby.
+    /// </summary>
     private void Update()
     {
         // Check for interaction input
@@ -21,6 +26,9 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Displays the controls UI and logs the dialogue.
+    /// </summary>
     private void ShowControls()
     {
         if (controlsUI != null)
@@ -34,6 +42,9 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Detects when the player enters the interaction range.
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         // Check if the player enters the interaction range
@@ -43,6 +54,9 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Detects when the player leaves the interaction range and hides the UI.
+    /// </summary>
     private void OnTriggerExit(Collider other)
     {
         // Check if the player leaves the interaction range

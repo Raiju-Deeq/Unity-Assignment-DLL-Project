@@ -1,19 +1,26 @@
 using UnityEngine;
 using GamePlayDLL;
 
+/// <summary>
+/// Represents a shooter enemy that moves towards the player and fires projectiles.
+/// This script should be attached to shooter enemy game objects.
+/// </summary>
 public class Shooter : MonoBehaviour, IEnemy
 {
     [Header("Shooter Settings")]
-    [SerializeField] private float movementSpeed = 2f;
-    [SerializeField] private float shootingRange = 5f;
+    [SerializeField] private float movementSpeed = 2f; // Speed at which the shooter moves
+    [SerializeField] private float shootingRange = 5f; // Maximum distance for shooting at the player
     [SerializeField] private float fireRate = 1f; // Time between shots
     [SerializeField] private GameObject projectilePrefab; // The projectile to shoot
     [SerializeField] private Transform firePoint; // Where the projectile spawns
-    [SerializeField] private int projectileDamage = 2;
+    [SerializeField] private int projectileDamage = 2; // Damage dealt by each projectile
 
-    private Transform player; // Reference to the player
-    private float nextFireTime = 0f;
+    private Transform player; // Reference to the player's transform
+    private float nextFireTime = 0f; // Time when the shooter can fire next
 
+    /// <summary>
+    /// Initializes the shooter by finding the player in the scene.
+    /// </summary>
     private void Start()
     {
         // Find the player in the scene
@@ -28,9 +35,13 @@ public class Shooter : MonoBehaviour, IEnemy
         }
     }
 
+    /// <summary>
+    /// Updates the shooter's behavior each frame.
+    /// </summary>
     private void Update()
     {
         if (player == null) return;
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer > shootingRange)
         {
@@ -42,13 +53,18 @@ public class Shooter : MonoBehaviour, IEnemy
         }
     }
 
+    /// <summary>
+    /// Moves the shooter towards the player.
+    /// </summary>
     private void MoveTowardsPlayer()
     {
-        // Move towards the player
         Vector3 direction = (player.position - transform.position).normalized;
         transform.position += direction * movementSpeed * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Handles the shooting behavior of the shooter.
+    /// </summary>
     private void ShootAtPlayer()
     {
         // Shoot at the player if cooldown has passed
@@ -73,10 +89,20 @@ public class Shooter : MonoBehaviour, IEnemy
         }
     }
 
+    /// <summary>
+    /// Implements the Attack method from the IEnemy interface.
+    /// </summary>
+    /// <param name="player">The player to attack.</param>
     public void Attack(IPlayer player)
     {
         Debug.Log("Shooter attacks!");
+        // Note: Actual attack logic is handled in ShootAtPlayer method
     }
 
+    /// <summary>
+    /// Returns the score value for defeating this enemy.
+    /// </summary>
+    /// <returns>The score value.</returns>
+    /// Todo when I add player shooting ability the player will get 50 points for killing this enemy
     public int GetScoreValue() => 50;
 }

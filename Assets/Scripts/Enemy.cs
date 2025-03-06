@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
 using GamePlayDLL;
-// This script defines an abstract base class for all enemy types, inheriting from Character and implementing IEnemy. It includes basic enemy behaviors and states.
+
+/// <summary>
+/// Abstract base class for all enemy types, inheriting from Character and implementing IEnemy.
+/// Provides basic enemy behaviors and states.
+/// </summary>
 public abstract class Enemy : Character, IEnemy
 {
     // Enum to define possible enemy states
     public enum EnemyState { Idle, Chasing }
+
     protected EnemyState enemyState;
     protected Transform target;
 
-    // Method to get the current enemy state
+    /// <summary>
+    /// Gets the current enemy state.
+    /// </summary>
     public EnemyState GetEnemyState() => enemyState;
 
-    // Method to destroy the enemy game object
+    /// <summary>
+    /// Destroys the enemy game object.
+    /// </summary>
     public void Destroy()
     {
         Destroy(gameObject);
@@ -21,7 +30,9 @@ public abstract class Enemy : Character, IEnemy
     public abstract void Attack(IPlayer player);
     public abstract int GetScoreValue();
 
-    // Virtual update method with basic chase logic
+    /// <summary>
+    /// Virtual update method with basic chase logic.
+    /// </summary>
     protected virtual void Update()
     {
         if (target != null)
