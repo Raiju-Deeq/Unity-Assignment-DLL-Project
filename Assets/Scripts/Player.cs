@@ -63,6 +63,7 @@ public class Player : Character, IPlayer
     {
         score += points * scoreMultiplier;
         Debug.Log($"Score increased by {points}. New score: {score}");
+        // find way to pass this back to dll
     }
 
     public int GetScore() => score;
