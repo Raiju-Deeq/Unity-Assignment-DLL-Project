@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SpeedBoost
+  - Shield
+  - DoublePoints
+  - Coin
   layers:
   - Default
   - TransparentFX

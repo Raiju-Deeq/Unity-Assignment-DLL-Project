@@ -9,22 +9,19 @@ public class Player : Character, IPlayer
     [SerializeField] private Vector3 respawnPosition = Vector3.zero;
 
     private float currentHealth;
-    private ScoreManager scoreManager;
-    private PowerUpManager powerUpManager;
+     // Default movement speed
     private bool isInvulnerable = false;
+    private int scoreMultiplier = 1;
+    private int score = 0;
 
     private void Awake()
     {
-        scoreManager = new ScoreManager();
-        powerUpManager = new PowerUpManager();
         currentHealth = maxHealth;
     }
 
     public void MovePlayer()
     {
-        // Calculate movement based on input
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        // Apply movement, clamped to maximum speed
         transform.Translate(movement * Mathf.Min(movementSpeed, maximumSpeed) * Time.deltaTime);
     }
 
@@ -37,10 +34,8 @@ public class Player : Character, IPlayer
     private IEnumerator RespawnCoroutine()
     {
         isInvulnerable = true;
-        // Wait for 2 seconds before respawning
         yield return new WaitForSeconds(2f);
         Respawn();
-        // 1 second of invulnerability after respawn
         yield return new WaitForSeconds(1f);
         isInvulnerable = false;
     }
@@ -52,11 +47,25 @@ public class Player : Character, IPlayer
         Debug.Log($"{characterName} has respawned with {currentHealth} health.");
     }
 
-    public void ApplyPowerUp(PowerUpType type, float duration)
+    public float GetMovementSpeed() => movementSpeed;
+
+    public void SetMovementSpeed(float speed) => movementSpeed = speed;
+
+    public bool IsInvulnerable() => isInvulnerable;
+
+    public void SetInvulnerable(bool invulnerable) => isInvulnerable = invulnerable;
+
+    public int GetScoreMultiplier() => scoreMultiplier;
+
+    public void SetScoreMultiplier(int multiplier) => scoreMultiplier = multiplier;
+
+    public void AddScore(int points)
     {
-        powerUpManager.ApplyPowerUp(this, type, duration);
-        Debug.Log($"Applied power-up: {type} for {duration} seconds.");
+        score += points * scoreMultiplier;
+        Debug.Log($"Score increased by {points}. New score: {score}");
     }
+
+    public int GetScore() => score;
 
     public void TakeDamage(int damage)
     {
@@ -66,26 +75,39 @@ public class Player : Character, IPlayer
         Debug.Log($"{characterName} took {damage} damage. Current health: {currentHealth}");
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
-    public void AddScore(int points)
+    private void OnTriggerEnter(Collider other)
     {
-        scoreManager.AddScore(points);
-        Debug.Log($"Score increased by {points}. New score: {scoreManager.GetCurrentScore()}");
+        if (other.CompareTag("SpeedBoost"))
+            ApplyPowerUp(new SpeedBoostEffect());
+        else if (other.CompareTag("Shield"))
+            ApplyPowerUp(new ShieldEffect());
+        else if (other.CompareTag("DoublePoints"))
+            ApplyPowerUp(new DoublePointsEffect());
+        else if (other.CompareTag("Coin"))
+            ApplyPowerUp(new CoinEffect());
+
+        Destroy(other.gameObject);
     }
 
-    public int GetScore()
+    private void ApplyPowerUp(PowerUpEffect effect)
     {
-        return scoreManager.GetCurrentScore();
+        effect.ApplyEffect(this);
+        if (!(effect is CoinEffect))
+            StartCoroutine(RemovePowerUpAfterDelay(effect));
+    }
+
+    private IEnumerator RemovePowerUpAfterDelay(PowerUpEffect effect)
+    {
+        yield return new WaitForSeconds(30f);
+        effect.RemoveEffect(this);
     }
 
     private void Update()
     {
         ClampPosition();
         MovePlayer();
-        powerUpManager.UpdatePowerUps();
     }
 }

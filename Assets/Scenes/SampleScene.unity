@@ -163,8 +163,8 @@ MonoBehaviour:
   spawnAreaMin: {x: -24.5, y: 1, z: -24.5}
   spawnAreaMax: {x: 24.5, y: 0, z: 24.5}
   collectablePrefabs:
-  - {fileID: 9197758721982599407, guid: f4af8479d8617cc49b3e47874134cb3f, type: 3}
   - {fileID: 5165232614949068473, guid: 5c4735b7a0d85c4439f2398508573823, type: 3}
+  - {fileID: 9197758721982599407, guid: f4af8479d8617cc49b3e47874134cb3f, type: 3}
   collectableSpawnInterval: 5
 --- !u!4 &35006198
 Transform:
