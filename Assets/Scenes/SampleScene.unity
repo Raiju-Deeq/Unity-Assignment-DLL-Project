@@ -152,13 +152,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hazardPrefab: {fileID: 4121246153694886782, guid: 15841fb784dff5d43854a072078bc068, type: 3}
-  numberOfHazards: 25
+  numberOfHazards: 14
   levelBounds: {x: -24.5, y: 0, z: 24.5}
   playerPrefab: {fileID: 523525480221488092, guid: f4aa6ca3cc896e4468c448a0ba657c51, type: 3}
   wandererPrefab: {fileID: 1821147396123280671, guid: 70b245d6eddfd804eb793f60b0a3b5de, type: 3}
   chaserPrefab: {fileID: 405560981576432040, guid: 116414765f013124d9901cca300b20e4, type: 3}
   shooterPrefab: {fileID: 8043726429106377289, guid: e05817c6aa180794c8a85270f19ba464, type: 3}
-  numberOfEnemies: 10
+  numberOfEnemies: 7
   enemySpawnDelay: 3
   spawnAreaMin: {x: -24.5, y: 1, z: -24.5}
   spawnAreaMax: {x: 24.5, y: 0, z: 24.5}

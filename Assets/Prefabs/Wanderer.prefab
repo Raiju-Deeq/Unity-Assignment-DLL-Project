@@ -146,8 +146,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b4a4541873411cb547df4e161de17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  patrolPoints: []
+  randomPoints: 5
   waitTime: 3
-  spawnAreaMin: {x: -24.5, y: 1, z: -24.5}
-  spawnAreaMax: {x: 24.5, y: 0, z: 24.5}
-  numberOfPatrolPoints: 10
+  startWaitTime: 1
+  movementSpeed: 5
+  morphedMovementSpeed: 25
+  normalColor: {r: 0, g: 0, b: 1, a: 1}
+  morphedColor: {r: 1, g: 0, b: 0, a: 1}
+  normalScale: {x: 1, y: 1, z: 1}
+  morphedScale: {x: 3, y: 3, z: 3}
+  morphRange: 10
+  revertRange: 15

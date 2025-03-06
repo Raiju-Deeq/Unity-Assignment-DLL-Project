@@ -3,26 +3,57 @@ using GamePlayDLL;
 
 public class Chaser : Enemy
 {
-    [SerializeField] private float chaseRange = 10f;
+    [SerializeField] private float chaseRange = 15f; // Updated to 15 units
+    [SerializeField] private float idleRange = 20f; // New range for idle state
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private int collisionDamage = 10;
+    [SerializeField] private Color normalColor = Color.red; // Default color when chasing
+    [SerializeField] private Color idleColor = Color.grey; // Grey color when idle
+
+    private Renderer enemyRenderer;
 
     private void Start()
     {
         // Find and set the player as the target
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Get the renderer component for color changing
+        enemyRenderer = GetComponent<Renderer>();
+        if (enemyRenderer != null)
+        {
+            enemyRenderer.material.color = normalColor;
+        }
     }
 
     public void ChasePlayer()
     {
+        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
+
         // Set enemy state based on distance to player
-        if (Vector3.Distance(transform.position, target.position) <= chaseRange)
+        if (distanceToPlayer <= chaseRange)
         {
             enemyState = EnemyState.Chasing;
+
+            // Change color to normal when chasing
+            if (enemyRenderer != null)
+            {
+                enemyRenderer.material.color = normalColor;
+            }
+
+            // Move toward the player
+            transform.position = Vector3.MoveTowards(transform.position, target.position, movementSpeed * Time.deltaTime);
         }
-        else
+        else if (distanceToPlayer > idleRange)
         {
             enemyState = EnemyState.Idle;
+
+            // Change color to grey when idle
+            if (enemyRenderer != null)
+            {
+                enemyRenderer.material.color = idleColor;
+            }
+
+            // Don't move when idle (beyond 20 units)
         }
     }
 
@@ -48,7 +79,8 @@ public class Chaser : Enemy
     {
         base.Update();
         ChasePlayer();
-        if (target != null && target.GetComponent<IPlayer>() != null)
+
+        if (target != null && enemyState == EnemyState.Chasing && target.GetComponent<IPlayer>() != null)
         {
             Attack(target.GetComponent<IPlayer>());
         }
