@@ -30,7 +30,7 @@ public class GameManagerUnity : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private Text scoreText;
-
+    private Player player;
     private void Start()
     {
         gameManager = new GameManager();
@@ -40,12 +40,22 @@ public class GameManagerUnity : MonoBehaviour
         StartCoroutine(SpawnEnemiesWithDelay());
         InvokeRepeating(nameof(SpawnCollectable), 0f, collectableSpawnInterval);
         SpawnHazards();
-        UpdateScoreUI();
+        player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            player.OnScoreChanged += UpdateScoreUI;
+        }
+        else
+        {
+            Debug.LogError("Player not found in the scene!");
+        }
+
+        UpdateScoreUI(0); // Initialize score display
     }
 
     private void Update()
     {
-        UpdateScoreUI();
+ 
     }
 
     private void SpawnHazards()
@@ -138,11 +148,15 @@ public class GameManagerUnity : MonoBehaviour
         Debug.Log("Game Over");
     }
 
-    private void UpdateScoreUI()
+    private void UpdateScoreUI(int newScore)
     {
         if (scoreText != null)
         {
-            scoreText.text = $"Score: {gameManager.GetCurrentScore()}";
+            scoreText.text = $"Score: {newScore}";
+        }
+        else
+        {
+            Debug.LogError("Score Text reference is missing!");
         }
     }
 

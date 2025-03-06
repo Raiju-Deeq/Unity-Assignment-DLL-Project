@@ -7,7 +7,7 @@ public class Player : Character, IPlayer
     [SerializeField] private float maximumSpeed = 10f;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private Vector3 respawnPosition = Vector3.zero;
-
+    public event System.Action<int> OnScoreChanged;
     private float currentHealth;
      // Default movement speed
     private bool isInvulnerable = false;
@@ -63,7 +63,7 @@ public class Player : Character, IPlayer
     {
         score += points * scoreMultiplier;
         Debug.Log($"Score increased by {points}. New score: {score}");
-        // find way to pass this back to dll
+        OnScoreChanged?.Invoke(score);
     }
 
     public int GetScore() => score;
