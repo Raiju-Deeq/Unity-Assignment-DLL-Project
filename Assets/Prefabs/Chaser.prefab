@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: chaser
-  movementSpeed: 3
+  movementSpeed: 4
   damage: 0
   border: 24.5
   chaseRange: 5

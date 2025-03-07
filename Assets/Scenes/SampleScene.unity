@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 4402080202523898102, guid: a5153b9091f4a3d4baff72258404af9f, type: 3}
   collectableSpawnInterval: 5
   scoreText: {fileID: 1612515259}
+  healthText: {fileID: 1844597836}
 --- !u!4 &35006198
 Transform:
   m_ObjectHideFlags: 0
@@ -908,13 +909,14 @@ GameObject:
   - component: {fileID: 1844597835}
   - component: {fileID: 1844597837}
   - component: {fileID: 1844597836}
+  - component: {fileID: 1844597838}
   m_Layer: 5
   m_Name: Health Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1844597835
 RectTransform:
   m_ObjectHideFlags: 0
@@ -931,7 +933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 550, y: 120}
+  m_AnchoredPosition: {x: 511.87, y: 150}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1844597836
@@ -956,10 +958,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 19
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -967,7 +969,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1844597837
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -976,6 +978,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844597834}
   m_CullTransparentMesh: 1
+--- !u!114 &1844597838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844597834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5c72a850f94794ca65e7d01cb70473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2015073649
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class Player : Character, IPlayer
 
     public event System.Action<int> OnScoreChanged; // Event triggered when the score changes
 
-    private float currentHealth; // Current health of the player
+    public float currentHealth; // Current health of the player
     private bool isInvulnerable = false; // Flag to check if the player is currently invulnerable
     private int scoreMultiplier = 1; // Multiplier applied to score increases
     private int score = 0; // Current score of the player

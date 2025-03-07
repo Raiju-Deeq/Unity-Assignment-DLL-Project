@@ -36,6 +36,7 @@ public class GameManagerUnity : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private Text scoreText;
+    [SerializeField] private Text healthText; 
 
     private Player player;
 
@@ -62,11 +63,12 @@ public class GameManagerUnity : MonoBehaviour
         }
 
         UpdateScoreUI(0); // Initialize score display
+        UpdateHealthUI(); // Initialize health display
     }
 
     private void Update()
     {
-        // Update logic can be added here if needed
+        UpdateHealthUI(); // Update health every frame
     }
 
     /// <summary>
@@ -190,6 +192,18 @@ public class GameManagerUnity : MonoBehaviour
         else
         {
             Debug.LogError("Score Text reference is missing!");
+        }
+    }
+    
+    private void UpdateHealthUI()
+    {
+        if (healthText != null && player != null)
+        {
+            healthText.text = $"Health: {player.currentHealth}";
+        }
+        else if (healthText == null)
+        {
+            Debug.LogError("Health Text reference is missing!");
         }
     }
 }
