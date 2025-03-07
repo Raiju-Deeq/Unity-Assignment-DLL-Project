@@ -8,7 +8,7 @@ using GamePlayDLL;
 /// </summary>
 public class PowerUpManager : MonoBehaviour
 {
-    // Dictionary to store active power-ups and their remaining durations
+    // Dictionary to store active power-ups
     private Dictionary<PowerUpType, float> activePowerUps = new Dictionary<PowerUpType, float>();
 
     /// <summary>
@@ -56,7 +56,6 @@ public class PowerUpManager : MonoBehaviour
 
     /// <summary>
     /// Updates the duration of active power-ups and removes expired ones.
-    /// Should be called in the Update method.
     /// </summary>
     public void UpdatePowerUps()
     {
@@ -74,7 +73,7 @@ public class PowerUpManager : MonoBehaviour
         foreach (var expiredPowerUp in expiredPowerUps)
         {
             activePowerUps.Remove(expiredPowerUp);
-            // TODO: Implement logic to remove power-up effect from the player
+            // TODO: Implement logic to remove power-up effect from the player 
         }
     }
 }

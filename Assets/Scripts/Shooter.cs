@@ -3,20 +3,19 @@ using GamePlayDLL;
 
 /// <summary>
 /// Represents a shooter enemy that moves towards the player and fires projectiles.
-/// This script should be attached to shooter enemy game objects.
 /// </summary>
 public class Shooter : MonoBehaviour, IEnemy
 {
     [Header("Shooter Settings")]
-    [SerializeField] private float movementSpeed = 2f; // Speed at which the shooter moves
-    [SerializeField] private float shootingRange = 5f; // Maximum distance for shooting at the player
-    [SerializeField] private float fireRate = 1f; // Time between shots
-    [SerializeField] private GameObject projectilePrefab; // The projectile to shoot
-    [SerializeField] private Transform firePoint; // Where the projectile spawns
-    [SerializeField] private int projectileDamage = 2; // Damage dealt by each projectile
+    [SerializeField] private float movementSpeed = 2f; 
+    [SerializeField] private float shootingRange = 5f; 
+    [SerializeField] private float fireRate = 1f; 
+    [SerializeField] private GameObject projectilePrefab; 
+    [SerializeField] private Transform firePoint; 
+    [SerializeField] private int projectileDamage = 2; 
 
-    private Transform player; // Reference to the player's transform
-    private float nextFireTime = 0f; // Time when the shooter can fire next
+    private Transform player; 
+    private float nextFireTime = 0f; 
 
     /// <summary>
     /// Initializes the shooter by finding the player in the scene.
@@ -63,7 +62,7 @@ public class Shooter : MonoBehaviour, IEnemy
     }
 
     /// <summary>
-    /// Handles the shooting behavior of the shooter.
+    /// Shooting behavior 
     /// </summary>
     private void ShootAtPlayer()
     {
@@ -96,7 +95,6 @@ public class Shooter : MonoBehaviour, IEnemy
     public void Attack(IPlayer player)
     {
         Debug.Log("Shooter attacks!");
-        // Note: Actual attack logic is handled in ShootAtPlayer method
     }
 
     /// <summary>

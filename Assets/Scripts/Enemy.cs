@@ -3,7 +3,6 @@ using GamePlayDLL;
 
 /// <summary>
 /// Abstract base class for all enemy types, inheriting from Character and implementing IEnemy.
-/// Provides basic enemy behaviors and states.
 /// </summary>
 public abstract class Enemy : Character, IEnemy
 {
@@ -19,19 +18,19 @@ public abstract class Enemy : Character, IEnemy
     public EnemyState GetEnemyState() => enemyState;
 
     /// <summary>
-    /// Destroys the enemy game object.
+    /// Destroys the enemy game object will use to kill enemies
     /// </summary>
     public void Destroy()
     {
         Destroy(gameObject);
     }
 
-    // Abstract methods to be implemented by derived classes
+    
     public abstract void Attack(IPlayer player);
     public abstract int GetScoreValue();
 
     /// <summary>
-    /// Virtual update method with basic chase logic.
+    /// Virtual update method with basic chase logic
     /// </summary>
     protected virtual void Update()
     {

@@ -2,13 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// Represents an environmental hazard that can damage the player.
+/// Represents an environmental hazard 
 /// The hazard alternates between active and inactive states.
-/// Currently kills the player if they collide with it after the hazard transitions from active to inactive states.
+/// Currently, kills the player if they collide with it after the hazard transitions from active to inactive states.
 /// </summary>
 public class EnvironmentHazard : MonoBehaviour
 {
-    // public int damageAmount = 10; // Commented out as it's not currently used
 
     /// <summary>
     /// The time interval between state changes (active/inactive).
@@ -60,7 +59,7 @@ public class EnvironmentHazard : MonoBehaviour
     }
 
     /// <summary>
-    /// Plays a sound effect when the hazard changes state.
+    /// Plays a sound effect when the hazard changes state. Not done at come back to it
     /// </summary>
     private void PlayStateChangeSound()
     {
@@ -77,7 +76,6 @@ public class EnvironmentHazard : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                // player.TakeDamage(damageAmount); // Commented out as damageAmount is not used
                 player.Die();
             }
         }

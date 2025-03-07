@@ -3,43 +3,42 @@ using GamePlayDLL;
 
 /// <summary>
 /// Represents a wandering enemy that patrols between points and can morph when near the player.
-/// This script should be attached to wanderer enemy game objects.
 /// </summary>
 public class Wanderer : MonoBehaviour, IEnemy
 {
     [Header("Patrol Settings")]
-    [SerializeField] private Transform[] patrolPoints; // Array of patrol points
-    [SerializeField] private int randomPoints = 5; // Number of random points to generate if no patrol points are set
-    [SerializeField] private float waitTime = 1f; // Time to wait at each patrol point
-    [SerializeField] private float startWaitTime = 1f; // Initial wait time
+    [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] private int randomPoints = 5; 
+    [SerializeField] private float waitTime = 1f; 
+    [SerializeField] private float startWaitTime = 1f; 
 
     [Header("Movement Settings")]
-    [SerializeField] private float movementSpeed = 3f; // Normal movement speed
-    [SerializeField] private float morphedMovementSpeed = 5f; // Speed when morphed
+    [SerializeField] private float movementSpeed = 3f; 
+    [SerializeField] private float morphedMovementSpeed = 5f; 
 
     [Header("Appearance Settings")]
-    [SerializeField] private Color normalColor = Color.blue; // Color in normal state
-    [SerializeField] private Color morphedColor = Color.red; // Color when morphed
-    [SerializeField] private Vector3 normalScale = Vector3.one; // Size in normal state
-    [SerializeField] private Vector3 morphedScale = new Vector3(1.5f, 1.5f, 1.5f); // Size when morphed
+    [SerializeField] private Color normalColor = Color.blue; 
+    [SerializeField] private Color morphedColor = Color.red; 
+    [SerializeField] private Vector3 normalScale = Vector3.one; 
+    [SerializeField] private Vector3 morphedScale = new Vector3(3f, 3f, 3f); 
 
     [Header("Morph Settings")]
-    [SerializeField] private float morphRange = 10f; // Range to trigger morphing
-    [SerializeField] private float revertRange = 15f; // Range to revert from morphed state
+    [SerializeField] private float morphRange = 10f;
+    [SerializeField] private float revertRange = 15f; 
 
-    private int currentPointIndex = 0; // Index of the current patrol point
-    private float currentWaitTime; // Current wait time at a patrol point
-    private bool isMorphed = false; // Flag to check if the wanderer is morphed
-    private Transform playerTransform; // Reference to the player's transform
-    private Renderer enemyRenderer; // Reference to the enemy's renderer component
-    private float currentMovementSpeed; // Current movement speed
+    private int currentPointIndex = 0; 
+    private float currentWaitTime; 
+    private bool isMorphed = false; 
+    private Transform playerTransform; 
+    private Renderer enemyRenderer; 
+    private float currentMovementSpeed; 
 
     /// <summary>
-    /// Initializes the wanderer by finding the player, setting up components, and generating patrol points if needed.
+    /// Initializes the wanderer
     /// </summary>
     private void Start()
     {
-        // Find the player
+        
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -84,7 +83,7 @@ public class Wanderer : MonoBehaviour, IEnemy
     }
 
     /// <summary>
-    /// Updates the wanderer's behavior each frame, checking for morphing conditions and patrolling.
+    /// Updates the wanderer's behavior each frame, patrol and check for morph conditions
     /// </summary>
     private void Update()
     {
@@ -109,7 +108,7 @@ public class Wanderer : MonoBehaviour, IEnemy
     }
 
     /// <summary>
-    /// Handles the patrolling behavior of the wanderer.
+    /// patrolling behaviour
     /// </summary>
     public void Patrol()
     {
@@ -122,13 +121,13 @@ public class Wanderer : MonoBehaviour, IEnemy
             currentMovementSpeed * Time.deltaTime
         );
 
-        // Check if reached the current patrol point
+        
         if (Vector3.Distance(transform.position, patrolPoints[currentPointIndex].position) < 0.2f)
         {
-            // Wait at the patrol point
+            
             if (currentWaitTime <= 0)
             {
-                // Move to the next patrol point
+                
                 currentPointIndex = (currentPointIndex + 1) % patrolPoints.Length;
                 currentWaitTime = waitTime;
             }
@@ -140,19 +139,16 @@ public class Wanderer : MonoBehaviour, IEnemy
     }
 
     /// <summary>
-    /// Morphs the wanderer, changing its appearance and speed.
+    /// Morphs the wanderer
     /// </summary>
     public void Morph()
     {
         isMorphed = true;
-        // Change appearance
         if (enemyRenderer != null)
         {
             enemyRenderer.material.color = morphedColor;
         }
-        // Increase size
         transform.localScale = morphedScale;
-        // Increase speed
         currentMovementSpeed = morphedMovementSpeed;
         Debug.Log("Wanderer has morphed!");
     }
@@ -163,20 +159,18 @@ public class Wanderer : MonoBehaviour, IEnemy
     public void RevertFromMorph()
     {
         isMorphed = false;
-        // Revert appearance
         if (enemyRenderer != null)
         {
             enemyRenderer.material.color = normalColor;
         }
-        // Revert size
         transform.localScale = normalScale;
-        // Revert speed
         currentMovementSpeed = movementSpeed;
         Debug.Log("Wanderer has reverted from morphed state.");
     }
 
     /// <summary>
-    /// Implements the Attack method from the IEnemy interface.
+    /// Implements the Attack method from the IEnemy interface. Not used fully atm
+    /// TODO add shooting behaviour
     /// </summary>
     /// <param name="player">The player to attack.</param>
     public void Attack(IPlayer player)
@@ -188,7 +182,8 @@ public class Wanderer : MonoBehaviour, IEnemy
     }
 
     /// <summary>
-    /// Returns the score value for defeating this enemy.
+    /// Returns the score value for defeating this enemy.not implemented properly
+    /// TODO add killing enemy functionality
     /// </summary>
     /// <returns>The score value, which is higher when morphed.</returns>
     public int GetScoreValue()

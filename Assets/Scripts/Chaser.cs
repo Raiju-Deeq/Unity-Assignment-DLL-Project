@@ -58,7 +58,7 @@ public class Chaser : Enemy
     }
 
     /// <summary>
-    /// Moves the enemy away from the player.
+    /// Retreat logic
     /// </summary>
     public void Retreat()
     {
@@ -66,7 +66,7 @@ public class Chaser : Enemy
     }
 
     /// <summary>
-    /// Attacks the player if within range.
+    /// Attacks the player if within range 
     /// </summary>
     /// <param name="player">The player to attack.</param>
     public override void Attack(IPlayer player)
@@ -79,7 +79,7 @@ public class Chaser : Enemy
     }
 
     /// <summary>
-    /// Returns the score value for defeating this enemy.
+    /// Returns the score value for defeating this enemy. Not used at the moment, will come back to it
     /// </summary>
     /// <returns>The score value.</returns>
     public override int GetScoreValue() => 50;

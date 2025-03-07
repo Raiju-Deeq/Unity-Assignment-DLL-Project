@@ -8,16 +8,16 @@ using GamePlayDLL;
 /// </summary>
 public class Player : Character, IPlayer
 {
-    [SerializeField] private float maximumSpeed = 10f; // Maximum movement speed of the player
-    [SerializeField] private float maxHealth = 100f; // Maximum health of the player
-    [SerializeField] private Vector3 respawnPosition = Vector3.zero; // Position where the player respawns
+    [SerializeField] private float maximumSpeed = 10f; 
+    [SerializeField] private float maxHealth = 100f; 
+    [SerializeField] private Vector3 respawnPosition = Vector3.zero; 
 
-    public event System.Action<int> OnScoreChanged; // Event triggered when the score changes
+    public event System.Action<int> OnScoreChanged; // When score changes trigger this event 
 
-    public float currentHealth; // Current health of the player
-    private bool isInvulnerable = false; // Flag to check if the player is currently invulnerable
-    private int scoreMultiplier = 1; // Multiplier applied to score increases
-    private int score = 0; // Current score of the player
+    public float currentHealth; 
+    private bool isInvulnerable = false; 
+    private int scoreMultiplier = 1; 
+    private int score = 0; 
 
     /// <summary>
     /// Initializes the player's health when the script awakens.
@@ -28,7 +28,7 @@ public class Player : Character, IPlayer
     }
 
     /// <summary>
-    /// Moves the player based on input axes.
+    /// Player Movement
     /// </summary>
     public void MovePlayer()
     {
@@ -38,6 +38,7 @@ public class Player : Character, IPlayer
 
     /// <summary>
     /// Handles the player's death and initiates respawn process.
+    /// TODO need to work on the respawn coroutine when I find time
     /// </summary>
     public void Die()
     {
@@ -46,7 +47,7 @@ public class Player : Character, IPlayer
     }
 
     /// <summary>
-    /// Coroutine to handle the respawn process with invulnerability period.
+    /// Coroutine to handle the respawn process with invulnerability period. Will come back to this
     /// </summary>
     private IEnumerator RespawnCoroutine()
     {
@@ -58,7 +59,7 @@ public class Player : Character, IPlayer
     }
 
     /// <summary>
-    /// Respawns the player at the designated position with full health.
+    /// Respawns the player at the chosen position with full health currently 0,1,0
     /// </summary>
     public void Respawn()
     {
@@ -67,7 +68,7 @@ public class Player : Character, IPlayer
         Debug.Log($"{characterName} has respawned with {currentHealth} health.");
     }
 
-    // Getter and setter methods for various player properties
+    
     public float GetMovementSpeed() => movementSpeed;
     public void SetMovementSpeed(float speed) => movementSpeed = speed;
     public bool IsInvulnerable() => isInvulnerable;
@@ -139,9 +140,6 @@ public class Player : Character, IPlayer
         effect.RemoveEffect(this);
     }
 
-    /// <summary>
-    /// Update is called once per frame.
-    /// </summary>
     private void Update()
     {
         ClampPosition();

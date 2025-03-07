@@ -4,11 +4,9 @@ using UnityEngine;
 
 /// <summary>
 /// Abstract base class for all characters in the game.
-/// Provides common properties and methods for character management.
 /// </summary>
 public abstract class Character : MonoBehaviour
 {
-    // Protected variables accessible to derived classes
     [SerializeField] protected string characterName;  // The name of the character
     [SerializeField] protected float movementSpeed;   // The movement speed of the character
     [SerializeField] protected float damage;          // The damage dealt by the character
@@ -21,8 +19,7 @@ public abstract class Character : MonoBehaviour
     public string GetName() => characterName;
 
     /// <summary>
-    /// Clamps the character's position within the defined border.
-    /// This prevents the character from moving outside the game area.
+    /// Clamps the character's position within the defined border, labs logic
     /// </summary>
     protected void ClampPosition()
     {

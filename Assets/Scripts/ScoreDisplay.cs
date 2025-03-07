@@ -3,15 +3,14 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Manages the display of the player's score in the UI.
-/// This script should be attached to a GameObject with a Text component.
 /// </summary>
 public class ScoreDisplay : MonoBehaviour
 {
-    private Text scoreText; // Reference to the Text component for displaying the score
-    private Player player; // Reference to the Player script
+    private Text scoreText; 
+    private Player player; 
 
     /// <summary>
-    /// Initializes the ScoreDisplay by finding necessary components and setting up event listeners.
+    /// Initializes the ScoreDisplay
     /// </summary>
     private void Start()
     {

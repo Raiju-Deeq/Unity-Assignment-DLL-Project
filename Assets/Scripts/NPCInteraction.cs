@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Handles interaction with an NPC that displays game controls.
-/// Currently disabled due to issues with player OnTrigger handling.
+/// Currently, disabled due to issues with player OnTrigger handling.
 /// </summary>
 public class NPCInteraction : MonoBehaviour
 {
     [Header("NPC Settings")]
     [SerializeField] private string dialogue = "Press E to view game controls.";
-    [SerializeField] private GameObject controlsUI; // Reference to the UI panel displaying controls
-    [SerializeField] private float interactionRange; // Distance within which the player can interact
+    [SerializeField] private GameObject controlsUI; 
+    [SerializeField] private float interactionRange;
 
     private bool isPlayerNearby = false;
 
@@ -34,7 +34,7 @@ public class NPCInteraction : MonoBehaviour
         if (controlsUI != null)
         {
             controlsUI.SetActive(true); // Activate the UI panel
-            Debug.Log(dialogue); // Optionally log dialogue for debugging
+            Debug.Log(dialogue); // Log dialogue for debugging
         }
         else
         {

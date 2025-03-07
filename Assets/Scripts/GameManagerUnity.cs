@@ -10,8 +10,11 @@ using UnityEngine.UI;
 public class GameManagerUnity : MonoBehaviour
 {
     private GameManager gameManager;
+    private bool isPaused = false;
+
 
     // Hazard settings
+    [Header("Hazard Settings")]
     public GameObject hazardPrefab;
     public int numberOfHazards = 5;
     public Vector3 levelBounds = new Vector3(10, 0, 10);
@@ -41,7 +44,7 @@ public class GameManagerUnity : MonoBehaviour
     private Player player;
 
     /// <summary>
-    /// Initializes the game, spawns entities, and sets up UI.
+    /// Initializing setup 
     /// </summary>
     private void Start()
     {
@@ -69,6 +72,11 @@ public class GameManagerUnity : MonoBehaviour
     private void Update()
     {
         UpdateHealthUI(); // Update health every frame
+        // Check for pause input 
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
 
     /// <summary>
@@ -113,7 +121,7 @@ public class GameManagerUnity : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns a random enemy type at a random position within the spawn area.
+    /// Spawns a random enemy type at a random position within the spawn area. 
     /// </summary>
     private void SpawnEnemy()
     {
@@ -123,15 +131,15 @@ public class GameManagerUnity : MonoBehaviour
             Random.Range(spawnAreaMin.z, spawnAreaMax.z)
         );
         float randomValue = Random.value;
-        if (randomValue < 0.33f) // 33% chance to spawn a Wanderer
+        if (randomValue < 0.33f) // 33% chance to spawn a Wanderer TODO find a way to hard code random logic
         {
             Instantiate(wandererPrefab, enemySpawnPosition, Quaternion.identity);
         }
-        else if (randomValue < 0.66f) // 33% chance to spawn a Chaser
+        else if (randomValue < 0.66f) // 33% chance to spawn a Chaser TODO find a way to hard code random logic
         {
             Instantiate(chaserPrefab, enemySpawnPosition, Quaternion.identity);
         }
-        else // Remaining chance to spawn a Shooter
+        else // Remaining chance to spawn a Shooter TODO find a way to hard code random logic
         {
             Instantiate(shooterPrefab, enemySpawnPosition, Quaternion.identity);
         }
@@ -159,6 +167,7 @@ public class GameManagerUnity : MonoBehaviour
     {
         gameManager.PauseGame();
         Time.timeScale = 0;
+        Debug.Log("Game Paused");
     }
 
     /// <summary>
@@ -168,6 +177,7 @@ public class GameManagerUnity : MonoBehaviour
     {
         gameManager.StartGame();
         Time.timeScale = 1;
+        Debug.Log("Game Resumed");
     }
 
     /// <summary>
@@ -206,4 +216,19 @@ public class GameManagerUnity : MonoBehaviour
             Debug.LogError("Health Text reference is missing!");
         }
     }
+    
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
+    }
+
+    
 }
